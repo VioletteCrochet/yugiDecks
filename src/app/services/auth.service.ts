@@ -8,8 +8,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-
   private readonly http: HttpClient = inject(HttpClient);
+
+  register(user:User): Observable<User> {
+    const body = JSON.stringify(user);
+    console.log(body);
+    
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.post<User>(`${environment.API_AUTH}signUp`, body, { headers });
+
+  }
 
   login(email: string, password: string): Observable<User> {
     const body = JSON.stringify({ email, password });
