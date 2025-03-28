@@ -11,6 +11,9 @@ export class HeaderComponent {
 
   links: any[] = [
     {name: "Home", path: ''},
-    {name: "Login", path: "login"}
+    {name: "Login", path: "login"},
+    {name: "Register", path: "register"},
+    {name: "Card list", path: "cardlist"},
+
   ]
 }

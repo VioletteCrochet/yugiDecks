@@ -11,7 +11,6 @@ import { User } from '../../types/user';
 })
 export class RegisterFormComponent {
 
-
   authService = inject(AuthService)
 
   registerForm: FormGroup = new FormGroup({
