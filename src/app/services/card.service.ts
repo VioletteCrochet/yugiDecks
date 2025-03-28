@@ -14,8 +14,11 @@ export class CardService {
     let params = new HttpParams();
     
     Object.keys(filters).forEach(key => {
-      params = params.set(key, filters[key]);
+      if(filters[key] != "" && filters[key] != null){
+        params = params.set(key, filters[key]);
+      }
     });
+    console.log(`params = ${params}`)
 
     return this.http.get<{ data: Card[] }>(environment.API_CARDS, { params })
       .pipe(
