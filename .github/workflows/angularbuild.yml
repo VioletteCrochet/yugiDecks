@@ -5,22 +5,27 @@ on:
 
 jobs:
     build:
-        name: 🔨 Build (toutes branches)
-        runs-on: ubuntu-latest
+        name: 🔨 Build (multi-OS & multi-Node)
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                os: [ubuntu-latest, windows-latest, macos-latest]
+                node: [18, 20, 22]
+
         steps:
-        -   name: Checkout du code
-            uses: actions/checkout@v4
+            -   name: Checkout du code
+                uses: actions/checkout@v4
 
-        -   name: Installer Node.js
-            uses: actions/setup-node@v4
-            with:
-                node-version: 22
+            -   name: Installer Node.js ${{ matrix.node }}
+                uses: actions/setup-node@v4
+                with:
+                    node-version: ${{ matrix.node }}
 
-        -   name: Installer les dépendances
-            run: npm ci
+            -   name: Installer les dépendances
+                run: npm ci
 
-        -   name: Build de l'application Angular
-            run: npm run build
+            -   name: Build de l'application Angular
+                run: npm run build
 
     ci:
         name: ✅ CI (develop, feature/*, release/*)
