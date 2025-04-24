@@ -75,7 +75,6 @@ jobs:
             uses: docker/build-push-action@v6
             with:
                 context: .
-                file: ./Dockerfile
                 push: false  # juste un check
 
         -   name: Build and push
