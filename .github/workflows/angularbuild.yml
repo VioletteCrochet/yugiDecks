@@ -1,0 +1,67 @@
+name: Angular Branch Workflow
+
+on:
+  push:
+
+jobs:
+  build:
+    name: 🔨 Build (toutes branches)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Build de l'application Angular
+        run: npm run build
+
+  ci:
+    name: ✅ CI (develop, feature/*, release/*)
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/heads/feature/') || startsWith(github.ref, 'refs/heads/release/')
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Lancer les tests unitaires
+        run: npm test -- --watch=false --browsers=ChromeHeadless
+
+  release:
+    name: 🚀 Release (release/* sauf hotfix/*)
+    runs-on: ubuntu-latest
+    needs: ci
+    if: startsWith(github.ref, 'refs/heads/release/') && !startsWith(github.ref, 'refs/heads/hotfix/')
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Simuler une release
+        run: echo "Release depuis ${{ github.ref }} – ici tu pourrais publier ou déployer l'app."
+
+  hotfix:
+    name: 🛠️ Hotfix (hotfix/*)
+    runs-on: ubuntu-latest
+    needs: build
+    if: startsWith(github.ref, 'refs/heads/hotfix/')
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Simuler un hotfix
+        run: echo "Patch de sécurité ou correction critique depuis ${{ github.ref }}"
