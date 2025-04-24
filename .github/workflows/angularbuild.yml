@@ -55,14 +55,13 @@ jobs:
             run: echo "Release depuis ${{ github.ref }} – ici tu pourrais publier ou déployer l'app."
 
     docker-build:
-        name: docker build
+        name: 🐳 Docker Build
         runs-on: ubuntu-latest
         needs: ci
         steps:
-
         -   name: Checkout du code
             uses: actions/checkout@v4
-            
+
         -   name: Login to Docker Hub
             uses: docker/login-action@v3
             with:
@@ -75,13 +74,18 @@ jobs:
         -   name: Validate build configuration
             uses: docker/build-push-action@v6
             with:
-                call: check
+                context: .
+                file: ./Dockerfile
+                push: false  # juste un check
 
         -   name: Build and push
             uses: docker/build-push-action@v6
             with:
+                context: .
+                file: ./Dockerfile
                 push: true
-                tags: ${{ secrets.DOCKERHUB_USERNAME }}/app
+                tags: ${{ secrets.DOCKERHUB_USERNAME }}/app:latest
+
     hotfix:
         name: 🛠️ Hotfix (hotfix/*)
         runs-on: ubuntu-latest
