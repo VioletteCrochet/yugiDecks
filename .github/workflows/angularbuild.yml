@@ -73,9 +73,6 @@ jobs:
 
         -   name: Validate build configuration
             uses: docker/build-push-action@v6
-            with:
-                context: .
-                push: false  # juste un check
 
         -   name: Build and push
             uses: docker/build-push-action@v6
