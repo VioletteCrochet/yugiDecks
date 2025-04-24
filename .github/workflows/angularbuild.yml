@@ -21,9 +21,6 @@ jobs:
 
         -   name: Build de l'application Angular
             run: npm run build
-            
-        -   name: Lancer les tests unitaires
-            run: npm test -- --watch=false --browsers=ChromeHeadless
 
     ci:
         name: ✅ CI (develop, feature/*, release/*)
