@@ -1,0 +1,108 @@
+<form [formGroup]="registerForm" (submit)="onSubmit()">
+  <h2 class="text-white text-lg font-medium title-font mb-5">Sign Up</h2>
+
+  <div class="relative mb-4">
+    <label for="email" class="leading-7 text-sm text-gray-400">Email</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      formControlName="email"
+      class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-purple-900 rounded border border-gray-600 focus:border-purple-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+    />
+    @if (registerForm.get('email')?.touched &&
+    registerForm.get('email')?.invalid) { @if
+    (registerForm.get('email')?.hasError('required')) {
+    <span>Cet email n'est pas au bon format</span>
+    } @if (registerForm.get('email')?.hasError('email')) {
+    <span>Cet email n'est pas au bon format</span>
+    } }
+  </div>
+  <div class="relative mb-4">
+    <label for="pseudo" class="leading-7 text-sm text-gray-400">pseudo</label>
+    <input
+      type="pseudo"
+      id="pseudo"
+      name="pseudo"
+      formControlName="pseudo"
+      class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-purple-900 rounded border border-gray-600 focus:border-purple-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+    />
+  </div>
+  <div class="relative mb-4">
+    <label for="city" class="leading-7 text-sm text-gray-400">city</label>
+    <input
+      type="city"
+      id="city"
+      name="city"
+      formControlName="city"
+      class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-purple-900 rounded border border-gray-600 focus:border-purple-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+    />
+    
+  </div>
+  <div class="relative mb-4">
+    <label for="cityCode" class="leading-7 text-sm text-gray-400">cityCode</label>
+    <input
+      type="cityCode"
+      id="cityCode"
+      name="cityCode"
+      formControlName="cityCode"
+      class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-purple-900 rounded border border-gray-600 focus:border-purple-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+    />
+    
+  </div>
+  <div class="relative mb-4">
+    <label for="phone" class="leading-7 text-sm text-gray-400">phone</label>
+    <input
+      type="phone"
+      id="phone"
+      name="phone"
+      formControlName="phone"
+      class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-purple-900 rounded border border-gray-600 focus:border-purple-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+    />
+    
+  </div>
+  <div class="relative mb-4">
+    <label for="password" class="leading-7 text-sm text-gray-400"
+      >password</label
+    >
+    <input
+      type="text"
+      id="password"
+      name="password"
+      formControlName="password"
+      class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-purple-900 rounded border border-gray-600 focus:border-purple-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+    />
+    @if (registerForm.get('password')?.touched && registerForm.get('password')?.invalid) { 
+
+        @if(registerForm.get('password')?.hasError('required')) {
+            <span>Mot de passe obligatoire</span>
+        } 
+        @if (registerForm.get('password')?.hasError('minlength')) {
+        <span>le mot de passe doit contenir un minimum de 10 caractères</span>
+        }
+    }
+  </div>
+  <div class="relative mb-4">
+    <label for="confirmPassword" class="leading-7 text-sm text-gray-400"
+      >confirm Password</label
+    >
+    <input
+      type="text"
+      id="confirmPassword"
+      name="confirmPassword"
+      formControlName="confirmPassword"
+      class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-purple-900 rounded border border-gray-600 focus:border-purple-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+    />
+    @if (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid) { 
+
+        @if(registerForm.get('confirmPassword')?.hasError('required')) {
+            <span>Mot de passe obligatoire</span>
+        } 
+        @if (registerForm.get('confirmPassword')?.hasError('minlength')) {
+        <span>le mot de passe doit contenir un minimum de 10 caractères</span>
+        }
+    }
+  </div>
+
+  <button type="submit" class="violet-btn">Register</button>
+</form>
